@@ -1,0 +1,26 @@
+用svg画动画 可以参考http://www.cnblogs.com/w3cdream/p/4995122.html   http://blog.csdn.net/w_liujun/article/details/39926205
+
+function drawCircle(x,y,noteImage) {
+	var circle = paper_gnote.circle(x,y,5);//画一个圆
+    circle.attr({
+        fill:"red",id:(noteImage.attr("id")+"circle")//设置属性
+    });
+    circle.transform(noteImage.transform());//svg偏移
+    var animateCircle = document.getElementById(noteImage.attr("id")+"circle");//转换一下，在目前这个监控系统下，circle不能直接appendChild
+     var animateOpacity = document.createElementNS("http://www.w3.org/2000/svg","animate");//设置透明变化
+    animateOpacity.setAttribute("attributeName","opacity");
+    animateOpacity.setAttribute("from","1");
+    animateOpacity.setAttribute("to","0");
+    animateOpacity.setAttribute("begin","0s");
+    animateOpacity.setAttribute("dur","1s");
+    animateOpacity.setAttribute("repeatCount","indefinite");
+    animateCircle.appendChild(animateOpacity);//添加到circle子标签
+    var animateRadius = document.createElementNS("http://www.w3.org/2000/svg","animate");//设置半径变化
+    animateRadius.setAttribute("attributeName","r");
+    animateRadius.setAttribute("from","10");
+    animateRadius.setAttribute("to","200");
+    animateRadius.setAttribute("begin","0s");
+    animateRadius.setAttribute("dur","1s");
+    animateRadius.setAttribute("repeatCount","indefinite");
+    animateCircle.appendChild(animateRadius);//添加到circle子标签
+}
