@@ -10,7 +10,7 @@
   String name = (String)fileParameterNames.nextElement();
 	String[] fileName = wrapper.getFileNames(name);
   File[] files = wrapper.getFiles(name);
-  这样files就是文件集合了，可以进行其他操作，
+  这样files就是文件集合了，遍历files即可获得单独的文件
 3.
   上传文件还可以使用ajaxFileUpload，不过这样好像只能实现单文件的上传，若要实现多文件上传，需要修改ajaxFileUpload源码，太麻烦，直接使用
   jQuery.form.js进行多文件提交即可；ajaxFileUpload详见http://blog.csdn.net/qq_33556185/article/details/50687974；
