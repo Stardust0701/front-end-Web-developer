@@ -1,0 +1,17 @@
+1.
+  使用input-file选择添加文件 有时候需要直接显示文件名称，大小等信息，可以用document.querySelector('input[type="file"]').files获得所有的文件
+然后就可以进行展示
+2.
+  进行表单form提交时，若表单包含多文件，使用jQuery默认的ajax序列化无法将文件进行序列化，这样提交会导致文件的丢失，可以采用jQuery的form插件进行提交，
+  使用ajaxSubmit提交会将form中所有信息提交，在后台可以使用HttpServletRequest request = ServletActionContext.getRequest();进行接收，
+  所有信息都在request中，若要获得文件可以使用
+  MultiPartRequestWrapper wrapper = (MultiPartRequestWrapper) request;//request强转MultiPartRequestWrapper完成文件上传
+	Enumeration fileParameterNames = wrapper.getFileParameterNames();
+  String name = (String)fileParameterNames.nextElement();
+	String[] fileName = wrapper.getFileNames(name);
+  File[] files = wrapper.getFiles(name);
+  这样files就是文件集合了，可以进行其他操作，
+3.
+  上传文件还可以使用ajaxFileUpload，不过这样好像只能实现单文件的上传，若要实现多文件上传，需要修改ajaxFileUpload源码，太麻烦，直接使用
+  jQuery.form.js进行多文件提交即可；ajaxFileUpload详见http://blog.csdn.net/qq_33556185/article/details/50687974；
+  jQuery.form.js详见http://www.cnblogs.com/azhw/p/4661838.html；http://blog.csdn.net/noteless/article/details/50148705
